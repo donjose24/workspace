@@ -1,5 +1,6 @@
 set rtp+=~/.vim/bundle/Vundle.vim
 
+filetype off
 call vundle#begin()
 
 Plugin 'VundleVim/Vundle.vim'
@@ -11,9 +12,14 @@ Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'shawncplus/phpcomplete.vim'
 Plugin 'editorconfig/editorconfig-vim'
-Plugin 'altercation/vim-colors-solarized'
-Plugin 'joonty/vim-phpqa'
 Plugin 'othree/xml.vim'
+Plugin 'vim-syntastic/syntastic'
+Plugin 'dikiaap/minimalist'
+Plugin 'flrnprz/plastic.vim'
+Plugin 'jwalton512/vim-blade'
+Plugin 'majutsushi/tagbar'
+Plugin 'fatih/vim-go'
+Plugin 'elixir-editors/vim-elixir'
 
 call vundle#end() 
 
@@ -29,7 +35,7 @@ let g:NERDTreeDirArrowExpandable = '▸'
 let g:NERDTreeDirArrowCollapsible = '▾'
 
 " Put this function at the very end of your vimrc file.
-colorscheme solarized
+
 set enc=utf-8
 set fileencoding=utf-8
 set fileencodings=ucs-bom,utf8,prc
@@ -53,5 +59,33 @@ let g:php_cs_fixer_verbose = 1
 autocmd BufWritePost *.php silent! call PhpCsFixerFixFile()
 inoremap { {}<ESC>ha
 set autoindent
-set smartindent
+filetype plugin indent on
+autocmd Filetype php setlocal ts=4 sw=4 expandtab
+autocmd Filetype javascript setlocal ts=4 sw=4 sts=0 expandtab
+autocmd Filetype elixir setlocal ts=2 sw=2 expandtab
+autocmd Filetype json setlocal ts=2 sw=2 expandtab
+autocmd Filetype css setlocal ts=2 sw=2 expandtab
+
+set expandtab
 set clipboard=unnamed
+set t_Co=256
+
+"syntactic
+
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+
+let g:syntastic_php_checkers=['php', 'phpcs']
+let g:syntastic_php_phpcs_args='--standard=PSR2 -n'
+
+set t_Co=256
+set background=dark
+colorscheme plastic
+
+nmap <F8> :TagbarToggle<CR>
