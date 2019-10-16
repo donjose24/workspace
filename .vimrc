@@ -20,6 +20,8 @@ Plugin 'jwalton512/vim-blade'
 Plugin 'majutsushi/tagbar'
 Plugin 'fatih/vim-go'
 Plugin 'elixir-editors/vim-elixir'
+Plugin 'moll/vim-node'
+Plugin 'pangloss/vim-javascript'
 
 call vundle#end() 
 
@@ -61,7 +63,7 @@ inoremap { {}<ESC>ha
 set autoindent
 filetype plugin indent on
 autocmd Filetype php setlocal ts=4 sw=4 expandtab
-autocmd Filetype javascript setlocal ts=4 sw=4 sts=0 expandtab
+autocmd Filetype javascript setlocal ts=2 sw=2 sts=0 expandtab
 autocmd Filetype elixir setlocal ts=2 sw=2 expandtab
 autocmd Filetype json setlocal ts=2 sw=2 expandtab
 autocmd Filetype css setlocal ts=2 sw=2 expandtab
@@ -86,12 +88,14 @@ let g:syntastic_php_phpcs_args='--standard=PSR2 -n'
 
 set t_Co=256
 set background=dark
-colorscheme plastic
+colorscheme cryslominsa
 
 nmap <F8> :TagbarToggle<CR>
 
-let g:go_highlight_structs = 1 
+let g:go_highlight_structs = 1
 let g:go_highlight_methods = 1
 let g:go_highlight_functions = 1
 let g:go_highlight_operators = 1
 let g:go_highlight_build_constraints = 1
+
+set clipboard=unnamed
