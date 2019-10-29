@@ -22,6 +22,10 @@ Plugin 'fatih/vim-go'
 Plugin 'elixir-editors/vim-elixir'
 Plugin 'moll/vim-node'
 Plugin 'pangloss/vim-javascript'
+Plugin 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
+Plugin 'leafgarland/typescript-vim'
+Plugin 'Quramy/tsuquyomi'
+Plugin 'prettier/vim-prettier', { 'do': 'yarn install' }
 
 call vundle#end() 
 
@@ -59,11 +63,14 @@ let g:php_cs_fixer_rules = "@PSR2"
 let g:php_cs_fixer_enable_default_mapping = 1 
 let g:php_cs_fixer_verbose = 1
 autocmd BufWritePost *.php silent! call PhpCsFixerFixFile()
+let g:prettier#autoformat = 0
+autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue PrettierAsync
 inoremap { {}<ESC>ha
 set autoindent
 filetype plugin indent on
 autocmd Filetype php setlocal ts=4 sw=4 expandtab
 autocmd Filetype javascript setlocal ts=2 sw=2 sts=0 expandtab
+autocmd Filetype typescript setlocal ts=2 sw=2 sts=0 expandtab
 autocmd Filetype elixir setlocal ts=2 sw=2 expandtab
 autocmd Filetype json setlocal ts=2 sw=2 expandtab
 autocmd Filetype css setlocal ts=2 sw=2 expandtab
@@ -99,3 +106,4 @@ let g:go_highlight_operators = 1
 let g:go_highlight_build_constraints = 1
 
 set clipboard=unnamed
+let mapleader = ","
