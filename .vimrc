@@ -26,6 +26,8 @@ Plugin 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
 Plugin 'leafgarland/typescript-vim'
 Plugin 'Quramy/tsuquyomi'
 Plugin 'prettier/vim-prettier', { 'do': 'yarn install' }
+Plugin 'dense-analysis/ale'
+Plugin 'exu/pgsql.vim'
 
 call vundle#end() 
 
@@ -74,6 +76,8 @@ autocmd Filetype typescript setlocal ts=2 sw=2 sts=0 expandtab
 autocmd Filetype elixir setlocal ts=2 sw=2 expandtab
 autocmd Filetype json setlocal ts=2 sw=2 expandtab
 autocmd Filetype css setlocal ts=2 sw=2 expandtab
+autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
+autocmd FileType make set noexpandtab shiftwidth=8 softtabstop=0
 
 set expandtab
 set clipboard=unnamed
@@ -107,3 +111,14 @@ let g:go_highlight_build_constraints = 1
 
 set clipboard=unnamed
 let mapleader = ","
+
+"Make sure to respect the tsconfig file
+autocmd FileType typescript call s:typescript_filetype_settings()
+function! s:typescript_filetype_settings()
+        set makeprg=tsc
+endfunction
+let g:ale_fixers = {
+ \ 'javascript': ['eslint']
+ \ }
+
+let g:sql_type_default = 'pgsql'
