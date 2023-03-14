@@ -28,6 +28,9 @@ Plugin 'Quramy/tsuquyomi'
 Plugin 'prettier/vim-prettier', { 'do': 'yarn install' }
 Plugin 'dense-analysis/ale'
 Plugin 'exu/pgsql.vim'
+Plugin 'peitalin/vim-jsx-typescript'
+Plugin 'jparise/vim-graphql'
+Plugin 'neoclide/coc.nvim'
 
 call vundle#end() 
 
@@ -122,3 +125,14 @@ let g:ale_fixers = {
  \ }
 
 let g:sql_type_default = 'pgsql'
+
+" use <tab> to trigger completion and navigate to the next complete item
+function! CheckBackspace() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+inoremap <silent><expr> <Tab>
+      \ coc#pum#visible() ? coc#pum#next(1) :
+      \ CheckBackspace() ? "\<Tab>" :
+      \ coc#refresh()
